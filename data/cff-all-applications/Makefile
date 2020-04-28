@@ -8,5 +8,6 @@ clean:
 	rm -Rf finished/*
 
 CFF-all-applications.csv: CFF-All-Applications-Geocoded.csv
-	csvcut -l -c "4,9" -x "$<" |\
-		(echo "CFF-all-applications_id,Name,Municipality"; tail +2) > finished/$(notdir $@)
+	csvcut -l -c "Name,City" -x "$<" |\
+		(echo "cff-all-applications_id,Name,Municipality,cultural-spaces-and-resources-in-ma_id,artist-work-live-spaces_id,spacefinder-massachusetts_id"; tail +2) |\
+		csvcut -c "Name,Municipality,artist-work-live-spaces_id,cff-all-applications_id,cultural-spaces-and-resources-in-ma_id,spacefinder-massachusetts_id" > finished/$(notdir $@)
