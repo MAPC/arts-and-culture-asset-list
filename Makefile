@@ -5,8 +5,9 @@ PROCESSOR_DIR = $(DIR)/processors
 export
 
 .PHONY: all clean
+# .SECONDARY: arts-and-cultural-assets-massachusetts-clustered.csv
 
-all: arts-and-cultural-assets-massachusetts.csv
+all:  arts-and-cultural-assets-massachusetts-stacked.csv
 
 clean:
 	cd data/spacefinder-massachusetts && $(MAKE) clean
@@ -27,8 +28,12 @@ cultural-spaces-and-resources-in-ma:
 spacefinder-massachusetts:
 	cd data/spacefinder-massachusetts && $(MAKE)
 
-arts-and-cultural-assets-massachusetts.csv: spacefinder-massachusetts artist-work-live-spaces cff-all-applications cultural-spaces-and-resources-in-ma
+arts-and-cultural-assets-massachusetts-stacked.csv: spacefinder-massachusetts artist-work-live-spaces cff-all-applications cultural-spaces-and-resources-in-ma
 	csvstack data/artist-work-live-spaces/finished/artist-work-live-spaces.csv\
 		data/cff-all-applications/finished/CFF-all-applications.csv\
 		data/cultural-spaces-and-resources-in-ma/finished/spaces-in-subregions.csv\
 		data/spacefinder-massachusetts/finished/spacefinder-massachusetts.csv > data/finished/$(notdir $@)
+# 		csvdedupe --field_names Name Municipality --training_file processors/training-cluster-rooms.json > data/finished/$(notdir $@)
+
+# arts-and-cultural-assets-massachusetts.csv: arts-and-cultural-assets-massachusetts-clustered.csv
+# 	python3 processors/deduplicate.py data/finished/$< > data/finished/$(notdir $@)

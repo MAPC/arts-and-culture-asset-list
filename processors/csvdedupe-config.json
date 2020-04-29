@@ -1,0 +1,8 @@
+{
+  "field_names": ["Name", "Municipality"],
+  "field_definition": [
+    { "field": "Name", "type": "String" },
+    { "field": "Municipality", "type": "String", "Has Missing": true }
+  ],
+  "skip_training": false
+}
