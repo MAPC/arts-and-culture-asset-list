@@ -1,18 +1,20 @@
+import argparse
 import sys
+import os
 import pandas as pd
 
-file_name = "CFF-LWP-CSR-SF-combined-deduplicated.csv"
+def create_arg_parser():
+    """Create parser for command line arguments."""
+    parser = argparse.ArgumentParser(description='Drop duplicate values ')
+    parser.add_argument('input',
+                        help='Path to the input file.')
+    return parser
 
-df = pd.read_csv(file_name, sep=",")
+if __name__ == "__main__":
+    arg_parser = create_arg_parser()
+    parsed_args = arg_parser.parse_args(sys.argv[1:])
 
-# Notes:
-# - the `subset=None` means that every column is used
-#    to determine if two rows are different; to change that specify
-#    the columns as an array
-# - the `inplace=True` means that the data structure is changed and
-#   the duplicate rows are gone
-df.drop_duplicates(subset=["Cluster ID"], inplace=True)
-df.drop_duplicates(subset=["Name", "Municipality"], inplace=True)
-
-# Write the results to a different file
-df.to_csv(sys.stdout)
+DF = pd.read_csv(parsed_args.input, sep=",")
+DF.drop_duplicates(subset=["Cluster ID"], inplace=True)
+DF.drop_duplicates(subset=["Name", "Municipality"], inplace=True)
+DF.to_csv(sys.stdout)
