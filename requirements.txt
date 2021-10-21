@@ -3,7 +3,7 @@ agate==1.6.1
 agate-dbf==0.2.1
 agate-excel==0.2.3
 agate-sql==0.5.4
-Babel==2.8.0
+Babel==2.9.1
 BTrees==4.7.2
 categorical-distance==1.9
 cffi==1.14.0
