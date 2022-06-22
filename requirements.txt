@@ -24,7 +24,7 @@ isodate==0.6.0
 jdcal==1.4.1
 leather==0.3.3
 Levenshtein-search==1.4.5
-numpy==1.18.2
+numpy==1.22.0
 openpyxl==3.0.3
 pandas==1.0.3
 parsedatetime==2.5
